@@ -1,0 +1,19 @@
+public StoreUser () {
+    this.users.add(new String[]{"SAI", "1", "0"});
+}
+
+public boolean isExistingUser (String name) {
+    return users.stream().anyMatch(user -> user[0].equals(name));
+}
+
+public boolean isValidCustomer(String name, String customerID) {
+    return users.stream().anyMatch(user -> user[0].equals(name) && user[1].equals(customerID));
+}
+
+public boolean isCustomerIdExists(String customerID) {
+    return users.stream().anyMatch(user -> user[1].equals(customerID));
+}
+
+public void addUser(String name, String id) {
+    users.add(new String[]{name, id, "0"});
+}
