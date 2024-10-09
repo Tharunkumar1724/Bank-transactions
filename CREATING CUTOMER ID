@@ -1,0 +1,44 @@
+import java.util.*;
+class BankTracker { 
+public static void main(String[] args) 
+{
+  StoreUser userStore = new StoreUser (); 
+  try (Scanner sc = new Scanner(System.in)) 
+  { 
+    while (true) 
+    { 
+    System.out.println("\t\t\t\t\t\tENTER THE BELOW DETAILS FOR ACCESS YOUR BANK ACCOUNT (MUST BE IN CAPITAL LETTERS)"); 
+    System.out.print("CUSTOMER NAME: "); 
+    String name = sc.nextLine(); 
+                if (userStore.isExistingUser (name)) {
+                handleExistingUser (sc, userStore, name);
+            } else {
+                handleNewUser (sc, userStore, name);
+            }
+        }
+    }
+}
+
+private static void handleExistingUser (Scanner sc, StoreUser  userStore, String name) {
+    System.out.print("CUSTOMER ID: ");
+    String customerID = sc.nextLine();
+    
+    if (userStore.isValidCustomer(name, customerID)) {
+        BankAccount account = new BankAccount(name, customerID, userStore);
+        account.accMain();
+    } else {
+        System.out.println("\t\t\t\t\t\t\t\t\t\tINCORRECT CUSTOMER ID!");
+    }
+}
+
+private static void handleNewUser (Scanner sc, StoreUser  userStore, String name) {
+    System.out.print("YOU ARE A NEW USER!!\nEnter CUSTOMER ID TO CREATE ACCOUNT: ");
+    String customerID = sc.nextLine();
+    
+    if (userStore.isCustomerIdExists(customerID)) {
+        System.out.println("CUSTOMER ID ALREADY EXISTS! TRY AGAIN!");
+    } else {
+        userStore.addUser (name, customerID);
+        System.out.println("Account created successfully!");
+    }
+}
