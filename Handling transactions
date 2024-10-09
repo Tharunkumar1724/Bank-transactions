@@ -1,0 +1,72 @@
+class BankAccount 
+{ 
+    double balance; 
+    String customerName; 
+    String customerID; 
+    static StoreUser userStore; 
+    UserTransaction temp; 
+    static ArrayList<UserTransaction> transactions = new ArrayList<>();
+    BankAccount(String customerName, String customerID, StoreUser  userStore) {
+    this.customerName = customerName;
+    this.customerID = customerID;
+    BankAccount.userStore = userStore;
+}
+
+void deposit(double amount) {
+    if (amount > 0) {
+        balance += amount;
+        temp = userObject(customerName);
+        temp.addTransaction("D" + amount + " FROM " + customerName);
+    }
+}
+
+void withdraw(double amount) {
+    if (amount > 0 && balance >= amount) {
+        balance -= amount;
+        temp = userObject(customerName);
+        temp.addTransaction("W" + amount + " TO " + customerName);
+    } else if (balance < amount) {
+        System.out.println("INSUFFICIENT BANK BALANCE");
+    }
+}
+
+public UserTransaction userObject(String name) {
+    for (User Transaction t : transactions) {
+        if (t.getName().equals(name)) {
+            return t;
+        }
+    }
+    UserTransaction newTransaction = new UserTransaction(name);
+    transactions.add(newTransaction);
+    return newTransaction;
+}
+
+void accMain() {
+    Scanner sc = new Scanner(System.in);
+    int option;
+    System.out.println("\tWELCOME " + customerName);
+    do {
+        System.out.println("*****PLEASE SELECT VALID OPTION*****");
+        System.out.println("1) BANK TRANSACTION");
+        System.out.println("2) TRANSACTION STATEMENT");
+        System.out.println("3) EXIT");
+        System.out.print("CHOOSE AN OPTION: ");
+        option = sc.nextInt();
+        switch (option) {
+            case 1:
+                handleTransaction(sc);
+                break;
+            case 2:
+                printTransactionStatement();
+                break;
+            case 3:
+                System.out.println("Thank you for using our banking services.");
+                break;
+            default:
+                System.out.println("PLEASE ENTER VALID OPTION!!");
+                break;
+        }
+    } while (option != 3);
+}
+
+ 
