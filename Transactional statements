@@ -1,0 +1,31 @@
+private void handleTransaction(Scanner sc) {
+    System.out.println("*****PLEASE SELECT TRANSACTION TYPE*****");
+    System.out.println("1) DEPOSIT");
+    System.out.println("2) WITHDRAW");
+    System.out.print("CHOOSE AN OPTION: ");
+    int option = sc.nextInt();
+    switch (option) {
+        case 1:
+            System.out.print("ENTER AMOUNT TO DEPOSIT: ");
+            double depositAmount = sc.nextDouble();
+            deposit(depositAmount);
+            break;
+        case 2:
+            System.out.print("ENTER AMOUNT TO WITHDRAW: ");
+            double withdrawAmount = sc.nextDouble();
+            withdraw(withdrawAmount);
+            break;
+        default:
+            System.out.println("PLEASE ENTER VALID OPTION!!");
+            break;
+    }
+}
+
+private void printTransactionStatement() {
+    System.out.println("TRANSACTION STATEMENT FOR " + customerName);
+    for (User Transaction t : transactions) {
+        if (t.getName().equals(customerName)) {
+            t.printTransactions();
+        }
+    }
+}
